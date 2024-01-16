@@ -3,10 +3,12 @@
 # Air-referenced state vector
 # ------------------------------------------
 
-from pyModeS import common
+from typing import Optional
+
+from ... import common
 
 
-def is53(msg):
+def is53(msg: str) -> bool:
     """Check if a message is likely to be BDS code 5,3
     (Air-referenced state vector)
 
@@ -58,7 +60,7 @@ def is53(msg):
     return True
 
 
-def hdg53(msg):
+def hdg53(msg: str) -> Optional[float]:
     """Magnetic heading, BDS 5,3 message
 
     Args:
@@ -78,16 +80,16 @@ def hdg53(msg):
     if sign:
         value = value - 1024
 
-    hdg = value * 90.0 / 512.0  # degree
+    hdg = value * 90 / 512  # degree
 
     # convert from [-180, 180] to [0, 360]
     if hdg < 0:
         hdg = 360 + hdg
 
-    return round(hdg, 3)
+    return hdg
 
 
-def ias53(msg):
+def ias53(msg: str) -> Optional[float]:
     """Indicated airspeed, DBS 5,3 message
 
     Args:
@@ -105,7 +107,7 @@ def ias53(msg):
     return ias
 
 
-def mach53(msg):
+def mach53(msg: str) -> Optional[float]:
     """MACH number, DBS 5,3 message
 
     Args:
@@ -120,10 +122,10 @@ def mach53(msg):
         return None
 
     mach = common.bin2int(d[24:33]) * 0.008
-    return round(mach, 3)
+    return mach
 
 
-def tas53(msg):
+def tas53(msg: str) -> Optional[float]:
     """Aircraft true airspeed, BDS 5,3 message
 
     Args:
@@ -138,10 +140,10 @@ def tas53(msg):
         return None
 
     tas = common.bin2int(d[34:46]) * 0.5  # kts
-    return round(tas, 1)
+    return tas
 
 
-def vr53(msg):
+def vr53(msg: str) -> Optional[int]:
     """Vertical rate
 
     Args:
