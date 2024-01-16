@@ -1,7 +1,7 @@
 # ------------------------------------------
 #   BDS 0,9
 #   ADS-B TC=19
-#   Aircraft Airborn velocity
+#   Aircraft Airborne velocity
 # ------------------------------------------
 
 import numpy as np

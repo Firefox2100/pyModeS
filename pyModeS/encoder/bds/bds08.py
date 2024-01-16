@@ -1,12 +1,12 @@
 # ------------------------------------------
 #   BDS 0,8
 #   ADS-B TC=1-4
-#   Aircraft identitification and category
+#   Aircraft identification and category
 # ------------------------------------------
 
 from pyModeS import common
 
-charmap = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ##### ###############0123456789######"
+charmap = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ#####_###############0123456789######"
 
 
 def me08(callsign, **kwargs):
@@ -26,7 +26,7 @@ def me08(callsign, **kwargs):
     if not cs.isalnum():
         raise Exception("callsign must only contain alphanumeric characters")
 
-    cs = "{:<8}".format(cs.upper())
+    cs = "{:<8}".format(cs.upper()).replace(" ", "_")
 
     idx = [charmap.index(c) for c in cs]
     me_bin = (
